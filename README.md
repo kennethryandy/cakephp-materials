@@ -398,3 +398,38 @@ $author->name = 'John Doe';
 // Save the entity
 $this->Authors->save($author);
 ```
+* Creating and Saving Associated Data:
+If you have associated models, you can include associated data while saving. For example, if an **Author** has many **Books**, you can save the author and associated books using the **newEntity()** method with associated data and the **save()** method with the **'associated'** option:
+```php
+// Create a new entity with associated data
+$author = $this->Authors->newEntity([
+    'name' => 'John Doe',
+    'books' => [
+        ['title' => 'Book 1'],
+        ['title' => 'Book 2'],
+    ]
+], ['associated' => ['Books']]);
+
+// Save the entity and associated data
+$this->Authors->save($author, ['associated' => ['Books']]);
+```
+* Using Table's **query()** Method:
+You can also use the **query()** method of the model's table to create and execute custom SQL queries. This provides more flexibility for complex insert operations. For example:
+```php
+$query = $this->Authors->query();
+$query->insert(['name'])
+    ->values(['name' => 'John Doe'])
+    ->execute();
+```
+* Batch Inserts:
+If you need to insert multiple records at once, you can use the **newEntities()** method to create multiple entities and then save them in a batch using the **saveMany()** method. For example:
+```php
+$authors = $this->Authors->newEntities([
+    ['name' => 'Author 1'],
+    ['name' => 'Author 2'],
+    ['name' => 'Author 3'],
+]);
+
+$this->Authors->saveMany($authors);
+```
+### These are some of the common methods used for inserting data in CakePHP version 3. Adjust the code according to your specific application's requirements and naming conventions.

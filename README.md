@@ -384,3 +384,17 @@ CakePHP provides asset management features to manage and include external CSS an
 ```
 
 Make sure the external CSS and JavaScript files are located in the webroot directory.
+
+---
+# Inserting Data
+
+* Creating and Saving Entities:
+You can create an entity using the model's **newEntity()** method and populate its properties with the data you want to insert. Then, save the entity using the model's **save()** method. For example:
+```php
+// Create a new entity
+$author = $this->Authors->newEntity();
+$author->name = 'John Doe';
+
+// Save the entity
+$this->Authors->save($author);
+```

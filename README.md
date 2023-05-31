@@ -559,6 +559,8 @@ $query->update()
 ```
 This approach allows you to have more control over the update query and can be useful for complex update operations.
 
+# Updating with relationship
+
 * Using the **saveAssociated()** method:
 	* If you have defined the associations between parent and child models correctly, you can use the **saveAssociated()** method to update both parent and child models in a single call.
 	* This method automatically handles saving associated data and manages the necessary foreign key relationships.

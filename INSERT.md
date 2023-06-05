@@ -131,3 +131,23 @@ $this->Books->save($book, ['associated' => ['Authors']]);
 ```
 
 In this example, the **Books** table has a **BelongsToMany** relationship with the Authors table, where multiple authors can be associated with a book through a join table.
+
+
+-   Transactional Saving: If you have multiple operations that need to be performed within a single transaction (such as saving the parent and child records), you can wrap the save operation in a transaction. This ensures that either all the records are saved successfully or none of them are saved.
+```php
+$connection = ConnectionManager::get('default');
+$connection->begin();
+try {
+    if ($this->Parent->save($parent, ['associated' => ['Child']])) {
+        $connection->commit();
+        // Success handling
+    } else {
+        $connection->rollback();
+        // Error handling
+    }
+} catch (\Exception $e) {
+    $connection->rollback();
+    // Exception handling
+}
+```
+
